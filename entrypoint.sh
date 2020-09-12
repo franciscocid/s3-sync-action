@@ -30,12 +30,12 @@ fi
 # Create a dedicated profile for this action to avoid conflicts
 # with past/future actions.
 # https://github.com/jakejarvis/s3-sync-action/issues/1
-aws configure --profile s3-sync-action <<-EOF > /dev/null 2>&1
-${AWS_ACCESS_KEY_ID}
-${AWS_SECRET_ACCESS_KEY}
-${AWS_REGION}
-text
-EOF
+
+echo "[default]" >> ~/.aws/credentials
+echo "aws_access_key_id=$AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+echo "aws_session_token=$AWS_SESSION_TOKEN" >> ~/.aws/credentials
+echo "aws_region=$AWS_REGION" >> ~/.aws/credentials
 
 # Sync using our dedicated profile and suppress verbose messages.
 # All other flags are optional via the `args:` directive.
